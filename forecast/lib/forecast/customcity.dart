@@ -46,7 +46,7 @@ class _MyAppState extends State<ForecastScreen2> {
                     children: [
                       Text(_data['location']['name'],
                           style: const TextStyle(
-                              fontSize: 40.0, fontFamily: 'Figtree-Regular')),
+                              fontSize: 34.0, fontFamily: 'Figtree-Regular')),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
