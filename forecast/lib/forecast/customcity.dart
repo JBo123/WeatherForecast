@@ -34,33 +34,103 @@ class _MyAppState extends State<ForecastScreen2> {
       title: 'HTTP Request',
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 108, 0, 127),
           title: Text('Weather Forecast '),
         ),
         body: _data.isEmpty
             ? Center(child: CircularProgressIndicator())
-            : Center(
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(_data['location']['name'],
-                            style: TextStyle(
-                                fontSize: 24.0, fontWeight: FontWeight.bold)),
-                        SizedBox(height: 8.0),
-                        Text('Temperature: ${_data['current']['temp_c']}°C'),
-                        SizedBox(height: 8.0),
-                        Text(
-                            'Condition: ${_data['current']['condition']['text']}'),
-                        SizedBox(height: 8.0),
-                        Text(
-                            'Wind Speed: ${_data['current']['wind_kph']} km/h'),
-                        SizedBox(height: 8.0),
-                        Text('Humidity: ${_data['current']['humidity']}%'),
-                      ],
-                    ),
+            : Align(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 0.0),
+                  child: Column(
+                    children: [
+                      Text(_data['location']['name'],
+                          style: const TextStyle(
+                              fontSize: 40.0, fontFamily: 'Figtree-Regular')),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Temperature: ${_data['current']['temp_c']}°C',
+                                style: const TextStyle(
+                                    fontSize: 24.0,
+                                    fontFamily: 'Figtree-Regular')),
+                            //    Icon(Icons.wb_sunny, size: 50.0)
+                          ]),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                                'Condition: ${_data['current']['condition']['text']}',
+                                style: const TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: 'Figtree-Regular')),
+                          ),
+                          if (_data['current']['condition']['text'] == 'Cloudy')
+                            Icon(Icons.cloud, size: 40.0)
+                          else if (_data['current']['condition']['text'] ==
+                              'Sunny')
+                            Icon(Icons.sunny, size: 40.0)
+                          else if (_data['current']['condition']['text'] ==
+                              'Clear')
+                            Icon(Icons.clear, size: 40.0)
+                          else if (_data['current']['condition']['text'] ==
+                              'Overcast')
+                            Icon(Icons.cloud, size: 40.0)
+                        ],
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                    'Wind Speed: ${_data['current']['wind_kph']} km/h',
+                                    style: const TextStyle(
+                                        fontSize: 20.0,
+                                        fontFamily: 'Figtree-Regular'))),
+                            if (_data['current']['wind_kph'] < 5)
+                              Icon(Icons.air_sharp, size: 20.0)
+                            else if (_data['current']['wind_kph'] > 5 &&
+                                _data['current']['wind_kph'] < 10)
+                              Icon(Icons.air_sharp, size: 35.0)
+                            else if (_data['current']['wind_kph'] > 10)
+                              Icon(Icons.air_sharp, size: 50.0),
+                          ]),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                  'Humidity: ${_data['current']['humidity']}%',
+                                  style: const TextStyle(
+                                      fontSize: 20.0,
+                                      fontFamily: 'Figtree-Regular')),
+                            ),
+                            if (_data['current']['humidity'] < 50)
+                              Icon(Icons.water_drop_outlined, size: 40.0)
+                            else if (_data['current']['humidity'] > 50)
+                              Icon(Icons.water_drop, size: 40.0),
+                          ]),
+
+                      //  ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.purple),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()),
+                          );
+                        },
+                        child: Text('Change City'),
+                      ),
+                    ],
                   ),
                 ),
               ),

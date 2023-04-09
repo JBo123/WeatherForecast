@@ -41,41 +41,33 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Container(
-            width: 200,
-            margin: EdgeInsets.only(top: 30),
-            decoration: const ShapeDecoration(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                    width: 1.5,
-                    style: BorderStyle.solid,
-                    color: Colors.black12),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-            ),
+            width: 300,
+            padding: EdgeInsets.only(top: 20),
+            //height: 40,
             child: TextField(
               controller: textController,
               maxLines: null,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                 hintText: 'Enter your city',
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                     color: Color.fromARGB(255, 108, 0, 127),
                     fontFamily: 'Figtree-Regular',
-                    fontSize: 24),
+                    fontSize: 22),
               ),
             ),
           ),
+          //  ),
           Center(
             child: IconButton(
               onPressed: () {
                 setState(() {
                   displayText = textController.text;
                 });
-                if (displayText != null) {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ForecastScreen2()));
-                }
+
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => ForecastScreen2()));
               },
               icon: Icon(Icons.cloud),
               iconSize: 100,
