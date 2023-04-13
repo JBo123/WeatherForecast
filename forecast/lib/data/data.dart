@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 //Future<Map<String, dynamic>>
@@ -24,5 +25,29 @@ Future<Map<String, dynamic>> fetchData() async {
     return data;
   } else {
     throw Exception('Failed to fetch data');
+  }
+}
+
+AssetImage loadImage({required String condition}) {
+  if (condition == 'Cloudy' || condition == 'Overcast')
+    return const AssetImage('assets/cloud.jpg');
+  else if (condition == 'Sunny' || condition == 'Clear')
+    return const AssetImage('assets/sun.jpg');
+  else if (condition == 'Rainyr' || condition == 'Light rain')
+    return const AssetImage('assets/rain.jpg');
+  else
+    return const AssetImage('assets/Background.png');
+}
+
+AssetImage _getImage(String condition) {
+  // String condition = _data['current']['condition']['text'];
+  if (condition == 'Sunny' || condition == 'Clear') {
+    return const AssetImage('assets/sun.jpg');
+  } else if (condition == 'Cloudy' || condition == 'Overcast') {
+    return AssetImage('assets/cloud.jpg');
+  } else if (condition == 'Rainy') {
+    return AssetImage('assets/rainy.jpg');
+  } else {
+    return AssetImage('assets/Background.jpg');
   }
 }

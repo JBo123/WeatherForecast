@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 108, 0, 127),
+        backgroundColor: Colors.blue,
         title: const Text(
           'Weather Forecast',
           style: TextStyle(
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text(
               'Forecast for your city',
               style: TextStyle(
-                  color: Color.fromARGB(255, 108, 0, 127),
+                  color: Colors.blueGrey,
                   fontFamily: 'Figtree-Regular',
                   fontSize: 28),
             ),
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                 hintText: 'Enter your city',
                 hintStyle: const TextStyle(
-                    color: Color.fromARGB(255, 108, 0, 127),
+                    color: Colors.blueGrey,
                     fontFamily: 'Figtree-Regular',
                     fontSize: 22),
               ),
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               icon: Icon(Icons.cloud),
               iconSize: 100,
-              color: Color.fromARGB(255, 108, 0, 127),
+              color: Colors.blue,
             ),
           ),
         ],
