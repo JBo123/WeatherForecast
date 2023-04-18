@@ -4,6 +4,7 @@ import 'package:forecast/data/data.dart';
 import 'package:forecast/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ForecastScreen2 extends StatefulWidget {
   const ForecastScreen2({super.key});
@@ -14,7 +15,6 @@ class ForecastScreen2 extends StatefulWidget {
 
 class _MyAppState extends State<ForecastScreen2> {
   Map<String, dynamic> _data = {};
-  String City = 'Pardubice';
 
   @override
   void initState() {

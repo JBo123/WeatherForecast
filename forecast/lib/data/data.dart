@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Future<Map<String, dynamic>>
 // Future<Map<String, dynamic>> fetchData() async {
@@ -50,4 +51,10 @@ AssetImage _getImage(String condition) {
   } else {
     return AssetImage('assets/Background.jpg');
   }
+}
+
+Future<void> getCity() async {
+  final prefs = await SharedPreferences.getInstance();
+  String city = prefs.getString('city') ?? '';
+  // return city;
 }

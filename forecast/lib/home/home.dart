@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:forecast/forecast/customcity.dart';
 import 'package:forecast/forecast/forecast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String? displayText;
 
@@ -15,6 +16,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController textController = TextEditingController();
+  List<String> City = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCity();
+  }
+
+  Future<void> _loadCity() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      City.add(prefs.getString('city') ?? '');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: IconButton(
               onPressed: () {
                 setState(() {
+                  _addItemToList(textController.text);
                   displayText = textController.text;
                 });
 
@@ -74,8 +90,21 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.blue,
             ),
           ),
+          Text(City.length.toString(),
+              style: const TextStyle(
+                  fontSize: 34.0, fontFamily: 'Figtree-Regular')),
         ],
       ),
     );
+  }
+
+  void _addItemToList(String newItem) async {
+    final prefs = await SharedPreferences.getInstance();
+    final List<String> existingList = prefs.getStringList('city') ?? [];
+    existingList.add(newItem);
+    await prefs.setStringList('city', existingList);
+    setState(() {
+      City = existingList;
+    });
   }
 }
